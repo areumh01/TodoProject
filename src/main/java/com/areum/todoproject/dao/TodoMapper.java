@@ -7,7 +7,7 @@ import java.util.List;
 
 @Mapper
 public interface TodoMapper {
-    void insert(TodoVO todoVO);
+    void insert(String title, java.sql.Date dueDate, String writer);
     List<TodoVO> selectAll();
     TodoVO selectOne(Long tno);
     void delete(Long tno);

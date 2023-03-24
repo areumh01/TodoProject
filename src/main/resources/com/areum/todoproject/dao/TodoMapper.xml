@@ -10,9 +10,9 @@
     <select id="selectOne" resultType="com.areum.todoproject.entity.TodoVO" parameterType="long">
         SELECT * FROM TBL_TODO WHERE TNO=#{tno}
     </select>
-    <insert id="insert" parameterType="com.areum.todoproject.entity.TodoVO">
-        INSERT INTO TBL_TODO (TNO, TITLE, DUEDATE, WRITER, FINISHED)
-        VALUES (TBL_TODO_SEQ.NEXTVAL, #{title}, #{duedate}, #{writer}, #{finished})
+    <insert id="insert">
+        INSERT INTO TBL_TODO (TNO, TITLE, DUEDATE, WRITER)
+        VALUES (TBL_TODO_TNO_SEQ.NEXTVAL, #{param1}, #{param2}, #{param3})
     </insert>
     <update id="update" parameterType="com.areum.todoproject.entity.TodoVO">
         UPDATE TBL_TODO SET TITLE=#{title}, DUEDATE=#{duedate}, WRITER=#{writer}, FINISHED=#{finished}
