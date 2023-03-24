@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<ul>
+    <div><input type="text" id="tno" th:value="${list.tno}" readonly/></div>
+    <div><input type="text" id="title" th:value="${list.title}" readonly/></div>
+    <div><input type="text" id="writer" th:value="${list.writer}" readonly/></div>
+    <div><input type="text" id="dueDate" th:field="${#dates.format(list.duedate, 'yyyy-MM-dd')}"/></div>
+    <!--<div><input type="checkbox" name="finished" *{finished "checked": ""} readonly/></div>-->
+
+</ul>
+</body>
+</html> 

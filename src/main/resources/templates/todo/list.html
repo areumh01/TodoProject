@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<ul>
+    <th:block th:each="list: ${lists}">
+    <tr>
+        <td><a th:href="@{/todo/view(tno=${list.tno})}"><th:block th:text="${list.tno}"></th:block></a></td>
+        <td th:text="${list.title}"></td>
+        <td th:text="${list.duedate}"></td>
+        <td th:text="${list.writer}"></td>
+        <td th:text="${list.finished}"></td>
+    </tr><br>
+    </th:block>
+</ul>
+</body>
+</html>
