@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action = "/todo/modify" method = "post">
+    <input type = "text" name = "tno" th:value = "${list.tno}" readonly/><br>
+    <input type = "text" name = "title" th:value = "${list.title}" ><br>
+    <input type=  "text" name=  "writer" th:value= "${list.writer}" ><br>
+    <input type = "date" name = "dueDate" th:value = "${#temporals.format(list.duedate, 'yyyy-MM-dd')}" ><br>-->
+    <input type = "radio" value = "0" name = "done" th:checked="${list.finished}? '' : 'checked'">NOT YET<br>
+    <input type = "radio" value = "1" name = "done" th:checked="${list.finished}? 'checked' : ''"}>DONE<br>
+    <!--<input type = "submit" value = "RESET">-->
+    <input type = "submit" value = "modify"><br>
+</form>
+</body>
+</html>
