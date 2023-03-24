@@ -11,6 +11,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.view.RedirectView;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 @Log4j2
 @Controller
@@ -19,6 +23,8 @@ public class TodoController {
 
     @Autowired
     private TodoService service;
+    private final DateTimeFormatter DATETIMEFORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
 
     @GetMapping("/list")
     public void list(Model model){
@@ -37,7 +43,21 @@ public class TodoController {
     public void view_register(){
     }
 
+    @PostMapping("/register")
+    public String register(String title, String dueDate, String writer, Model model){
+        TodoDTO dto = TodoDTO.builder()
+                .title(title)
+                        .duedate(LocalDate.parse((dueDate),DATETIMEFORMATTER))
+                                .writer(writer)
+                                        .build();
+        service.register(dto);
+        return "redirect:/todo/list";
+    }
 
+    @GetMapping("modify")
+    public void modify(){
+
+    }
 
 
 
