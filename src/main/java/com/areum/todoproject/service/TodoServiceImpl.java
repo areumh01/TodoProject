@@ -4,32 +4,46 @@ import com.areum.todoproject.dao.TodoMapper;
 import com.areum.todoproject.dto.TodoDTO;
 import com.areum.todoproject.entity.TodoVO;
 import lombok.extern.log4j.Log4j2;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+import java.sql.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Log4j2
 @Service
+@Transactional
 public class TodoServiceImpl implements TodoService{
 
     @Autowired
     private TodoMapper dao;
+    @Autowired
+    private ModelMapper modelMapper;
 
     @Override
-    public void register(TodoVO todoVO) {
+    public void register(TodoDTO todoDTO) {
+        java.sql.Date sqldueDate = java.sql.Date.valueOf(todoDTO.getDuedate());
+        dao.insert(todoDTO.getTitle(), sqldueDate, todoDTO.getWriter());
     }
 
     @Override
-    public List<TodoVO> getAll() {
-        log.info("service 실행");
-        return dao.selectAll();
+    public List<TodoDTO> getAll() {
+        List<TodoVO> voList = dao.selectAll();
+        List<TodoDTO> dtoList = voList.stream()
+                .map(vo -> modelMapper.map(vo,TodoDTO.class))
+                .collect(Collectors.toList());
+        return dtoList;
     }
 
     @Override
-    public TodoVO getOne(Long tno) {
+    public TodoDTO getOne(Long tno) {
         log.info("service 실행");
-        return dao.selectOne(tno);
+        TodoVO vo = dao.selectOne(tno);
+        TodoDTO dto = modelMapper.map(vo, TodoDTO.class);
+        return dto;
     }
 
     @Override
@@ -38,7 +52,7 @@ public class TodoServiceImpl implements TodoService{
     }
 
     @Override
-    public void modify(TodoVO todoVO) {
+    public void modify(TodoDTO todoDTO) {
 
     }
 }

@@ -7,9 +7,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 public interface TodoService {
-    void register(TodoVO todoVO);
-    List<TodoVO> getAll();
-    TodoVO getOne(Long tno);
+    void register(TodoDTO todoDTO);
+    List<TodoDTO> getAll();
+    TodoDTO getOne(Long tno);
     void remove(Long tno);
-    void modify(TodoVO todoVO);
+    void modify(TodoDTO todoDTO);
 }
