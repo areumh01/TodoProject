@@ -34,8 +34,10 @@ public class TodoController {
     }
 
     @GetMapping("/register")
-    public void register(){
+    public void view_register(){
     }
+
+
 
 
 
