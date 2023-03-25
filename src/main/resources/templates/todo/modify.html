@@ -63,22 +63,22 @@
                                 <input type="text" name="tno" class="form-control" th:value = "${list.tno}" readonly>
                             </div>
                             <div class="input-group mb-3">
-                                <span class="input-group-text">TNO</span>
+                                <span class="input-group-text">Title</span>
                                 <input type="text" name="title" class="form-control" th:value = "${list.title}">
                             </div>
                             <div class="input-group mb-3">
-                                <span class="input-group-text">TNO</span>
-                                <input type="text" name="writer" class="form-control" th:value = "${list.writer}">
+                                <span class="input-group-text">DueDate</span>
+                                <input type="date" name="dueDate" class="form-control" th:value = "${#temporals.format(list.duedate, 'yyyy-MM-dd')}">
                             </div>
                             <div class="input-group mb-3">
-                                <span class="input-group-text">TNO</span>
-                                <input type="date" name="dueDate" class="form-control" th:value = "${#temporals.format(list.duedate, 'yyyy-MM-dd')}">
+                                <span class="input-group-text">Writer</span>
+                                <input type="text" name="writer" class="form-control" th:value = "${list.writer}">
                             </div>
                             <div class="form-check">
                                 <label class="form-check-label" >
                                     Finished &nbsp;
                                 </label>
-                                <input class="form-check-input" type="checkbox" name="done" th:checked="${list.finished}? 'checked' : ''" >
+                                <input class="form-check-input" type="checkbox" name="done" th:checked="${list.finished}" >
                             </div>
 
                             <div class="my-4">

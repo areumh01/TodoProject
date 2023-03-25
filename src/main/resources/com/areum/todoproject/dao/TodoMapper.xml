@@ -12,11 +12,11 @@
     </select>
     <insert id="insert">
         INSERT INTO TBL_TODO (TNO, TITLE, DUEDATE, WRITER)
-        VALUES (TBL_TODO_TNO_SEQ.NEXTVAL, #{param1}, #{param2}, #{param3})
+        VALUES (TBL_TODO_TNO_SEQ.NEXTVAL, #{title}, #{duedate}, #{writer})
     </insert>
     <update id="update">
-        UPDATE TBL_TODO SET TITLE=#{param1}, DUEDATE=#{param2}, WRITER=#{param3}, FINISHED=#{param4}
-        WHERE TNO=#{param5}
+        UPDATE TBL_TODO SET TITLE=#{title}, DUEDATE=#{duedate}, WRITER=#{writer}, FINISHED=#{finished}
+        WHERE TNO=#{tno}
     </update>
     <delete id="delete" parameterType="long">
         DELETE FROM TBL_TODO WHERE TNO=#{tno}

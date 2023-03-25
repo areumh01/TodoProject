@@ -12,40 +12,17 @@
     <div class="row">
         <div class="row">
             <div class="col">
-                <nav class="navbar navbar-expand-lg bg-body-tertiary">
+                <nav class="navbar bg-body-tertiary">
                     <div class="container-fluid">
-                        <a class="navbar-brand" href="#">Navbar</a>
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                                <li class="nav-item">
-                                    <a class="nav-link active" aria-current="page" href="#">Home</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Link</a>
-                                </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        Dropdown
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="#">Action</a></li>
-                                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                                        <li><hr class="dropdown-divider"></li>
-                                        <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                    </ul>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link disabled">Disabled</a>
-                                </li>
-                            </ul>
-                            <form class="d-flex" role="search">
-                                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                                <button class="btn btn-outline-success" type="submit">Search</button>
-                            </form>
-                        </div>
+                        <a class="navbar-brand">Navbar</a>
+                        <form th:action="@{/todo/list(page=1,field=title,q=q)}" class="d-flex" role="search">
+                            <select name="field">
+                                <option value="title">제목</option>
+                                <option value="writerId">작성자</option>
+                            </select>
+                            <input class="form-control me-2" type="text" name="q" value="sdf" />
+                            <button class="btn btn-outline-success" type="submit">Search</button>
+                        </form>
                     </div>
                 </nav>
             </div>
@@ -63,8 +40,8 @@
                             <tr>
                                 <th scope="col">Tno</th>
                                 <th scope="col">Title</th>
-                                <th scope="col">Writer</th>
                                 <th scope="col">DueDate</th>
+                                <th scope="col">Writer</th>
                                 <th scope="col">Finished</th>
                             </tr>
                             </thead>
@@ -80,6 +57,22 @@
                             </th:block>
                             </tbody>
                         </table>
+                        <div class="my-4">
+                            <div class="float-end">
+                                <button type="button" class="btn btn-secondary"><a href = "/todo/register">Register</a></button>
+                            </div>
+                        </div>
+                        <div>
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination">
+                                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                                </ul>
+                            </nav>
+                        </div>
                     </div>
                 </div>
             </div>
