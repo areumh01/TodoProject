@@ -11,5 +11,5 @@ public interface TodoMapper {
     List<TodoVO> selectAll();
     TodoVO selectOne(Long tno);
     void delete(Long tno);
-    void update(TodoVO todoVO);
+    void update(String title, java.sql.Date duedate, String writer, int finished, Long tno);
 }

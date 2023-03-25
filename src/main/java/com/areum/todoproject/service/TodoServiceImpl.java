@@ -40,7 +40,6 @@ public class TodoServiceImpl implements TodoService{
 
     @Override
     public TodoDTO getOne(Long tno) {
-        log.info("service 실행");
         TodoVO vo = dao.selectOne(tno);
         TodoDTO dto = modelMapper.map(vo, TodoDTO.class);
         return dto;
@@ -48,11 +47,13 @@ public class TodoServiceImpl implements TodoService{
 
     @Override
     public void remove(Long tno) {
-
+        log.info("service실행");
+        dao.delete(tno);
     }
 
     @Override
     public void modify(TodoDTO todoDTO) {
-
+        java.sql.Date sqldueDate = java.sql.Date.valueOf(todoDTO.getDuedate());
+        dao.update(todoDTO.getTitle(), sqldueDate, todoDTO.getWriter(), todoDTO.getFinished(), todoDTO.getTno());
     }
 }
