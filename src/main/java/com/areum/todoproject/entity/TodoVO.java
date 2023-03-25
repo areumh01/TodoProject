@@ -14,5 +14,5 @@ public class TodoVO {
     private String title;
     private LocalDate duedate;
     private String writer;
-    private boolean finished;
+    private int finished;
 }

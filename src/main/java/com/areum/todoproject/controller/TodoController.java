@@ -54,7 +54,7 @@ public class TodoController {
         return "redirect:/todo/list";
     }
 
-    @GetMapping("modify")
+    @PostMapping("modify")
     public void view_modify(String title, String dueDate, String writer,String done, Model model){
         TodoDTO dto = TodoDTO.builder()
                 .title(title)
@@ -64,7 +64,7 @@ public class TodoController {
                 .build();
     }
 
-    @PostMapping("modify")
+    @GetMapping("modify")
     public void modify(long tno, Model model){
         model.addAttribute("list", service.getOne(tno));
     }
