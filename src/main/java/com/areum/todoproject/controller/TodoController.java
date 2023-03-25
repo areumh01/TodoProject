@@ -7,10 +7,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.time.LocalDate;
@@ -55,7 +52,8 @@ public class TodoController {
     }
 
     @PostMapping("modify")
-    public String view_modify(String title, String dueDate, String writer,String done,String tno, Model model){
+    public String view_modify(String title, String dueDate, String writer, @RequestParam(value = "done", defaultValue = "0") String done, String tno, Model model){
+        if(!done.equals("0")) done = "1";
         log.info(tno);
         TodoDTO dto = TodoDTO.builder()
                 .tno(Long.valueOf(tno))
