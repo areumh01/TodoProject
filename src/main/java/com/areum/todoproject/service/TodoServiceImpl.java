@@ -53,6 +53,11 @@ public class TodoServiceImpl implements TodoService{
 
     @Override
     public void modify(TodoDTO todoDTO) {
+        log.info(todoDTO.getTitle());
+        log.info(todoDTO.getDuedate());
+        log.info(todoDTO.getWriter());
+        log.info(todoDTO.getFinished());
+        log.info(todoDTO.getTno());
         java.sql.Date sqldueDate = java.sql.Date.valueOf(todoDTO.getDuedate());
         dao.update(todoDTO.getTitle(), sqldueDate, todoDTO.getWriter(), todoDTO.getFinished(), todoDTO.getTno());
     }

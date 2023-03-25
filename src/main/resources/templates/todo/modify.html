@@ -5,7 +5,7 @@
     <title>Title</title>
 </head>
 <body>
-<form action = "/todo/modify" method = "post">
+<form th:action = "@{/todo/modify}" method = "post">
     <input type = "text" name = "tno" th:value = "${list.tno}" readonly/><br>
     <input type = "text" name = "title" th:value = "${list.title}" ><br>
     <input type=  "text" name=  "writer" th:value= "${list.writer}" ><br>

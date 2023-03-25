@@ -14,7 +14,7 @@
         INSERT INTO TBL_TODO (TNO, TITLE, DUEDATE, WRITER)
         VALUES (TBL_TODO_TNO_SEQ.NEXTVAL, #{param1}, #{param2}, #{param3})
     </insert>
-    <update id="update" parameterType="com.areum.todoproject.entity.TodoVO">
+    <update id="update">
         UPDATE TBL_TODO SET TITLE=#{param1}, DUEDATE=#{param2}, WRITER=#{param3}, FINISHED=#{param4}
         WHERE TNO=#{param5}
     </update>

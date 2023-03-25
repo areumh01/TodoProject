@@ -54,17 +54,22 @@ public class TodoController {
         return "redirect:/todo/list";
     }
 
-    @GetMapping("modify")
-    public void view_modify(String title, String dueDate, String writer,String done, Model model){
+    @PostMapping("modify")
+    public String view_modify(String title, String dueDate, String writer,String done,String tno, Model model){
+        log.info(tno);
         TodoDTO dto = TodoDTO.builder()
+                .tno(Long.valueOf(tno))
                 .title(title)
                 .duedate(LocalDate.parse((dueDate),DATETIMEFORMATTER))
                 .writer(writer)
                 .finished(Integer.parseInt(done))
                 .build();
+        log.info(dto);
+        service.modify(dto);
+        return "redirect:/todo/list";
     }
 
-    @PostMapping("modify")
+    @GetMapping("modify")
     public void modify(long tno, Model model){
         model.addAttribute("list", service.getOne(tno));
     }
