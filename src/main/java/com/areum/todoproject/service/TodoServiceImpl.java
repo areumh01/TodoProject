@@ -19,19 +19,19 @@ import java.util.stream.Collectors;
 public class TodoServiceImpl implements TodoService{
 
     @Autowired
-    private TodoMapper dao;
+    private TodoMapper mapper;
     @Autowired
     private ModelMapper modelMapper;
 
     @Override
     public void register(TodoDTO todoDTO) {
         java.sql.Date sqldueDate = java.sql.Date.valueOf(todoDTO.getDuedate());
-        dao.insert(todoDTO.getTitle(), sqldueDate, todoDTO.getWriter());
+        mapper.insert(todoDTO.getTitle(), sqldueDate, todoDTO.getWriter());
     }
 
     @Override
     public List<TodoDTO> getAll() {
-        List<TodoVO> voList = dao.selectAll();
+        List<TodoVO> voList = mapper.selectAll();
         List<TodoDTO> dtoList = voList.stream()
                 .map(vo -> modelMapper.map(vo,TodoDTO.class))
                 .collect(Collectors.toList());
@@ -39,10 +39,10 @@ public class TodoServiceImpl implements TodoService{
     }
 
     @Override
-    public List<TodoDTO> getList(int page) {
+    public List<TodoDTO> getList(int page, String field, String keyword) {
         int start = (page-1)*10+1;
         int end = page*10;
-        List<TodoVO> voList = dao.selectList(start,end);
+        List<TodoVO> voList = mapper.selectList(start,end, field, keyword);
         List<TodoDTO> dtoList = voList.stream()
                 .map(vo -> modelMapper.map(vo,TodoDTO.class))
                 .collect(Collectors.toList());
@@ -51,7 +51,7 @@ public class TodoServiceImpl implements TodoService{
 
     @Override
     public TodoDTO getOne(Long tno) {
-        TodoVO vo = dao.selectOne(tno);
+        TodoVO vo = mapper.selectOne(tno);
         TodoDTO dto = modelMapper.map(vo, TodoDTO.class);
         return dto;
     }
@@ -59,7 +59,7 @@ public class TodoServiceImpl implements TodoService{
     @Override
     public void remove(Long tno) {
         log.info("service실행");
-        dao.delete(tno);
+        mapper.delete(tno);
     }
 
     @Override
@@ -70,6 +70,6 @@ public class TodoServiceImpl implements TodoService{
         log.info(todoDTO.getFinished());
         log.info(todoDTO.getTno());
         java.sql.Date sqldueDate = java.sql.Date.valueOf(todoDTO.getDuedate());
-        dao.update(todoDTO.getTitle(), sqldueDate, todoDTO.getWriter(), todoDTO.getFinished(), todoDTO.getTno());
+        mapper.update(todoDTO.getTitle(), sqldueDate, todoDTO.getWriter(), todoDTO.getFinished(), todoDTO.getTno());
     }
 }

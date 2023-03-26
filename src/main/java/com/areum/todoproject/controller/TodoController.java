@@ -24,9 +24,16 @@ public class TodoController {
 
 
     @GetMapping("/list")
-    public void list(@RequestParam(value = "page", defaultValue = "1") int page,Model model){
+    public void list(@RequestParam(value = "page", defaultValue = "1") int page,
+                     @RequestParam(value= "field", defaultValue = "title") String field,
+                     @RequestParam(value= "keyword", defaultValue = "") String keyword_, Model model){
         log.info(page);
-        model.addAttribute("lists", service.getList(page));
+        String keyword = "%"+keyword_+"%";
+        log.info(keyword);
+        model.addAttribute("lists", service.getList(page,field,keyword));
+        model.addAttribute("page", page);
+        model.addAttribute("field", field);
+        model.addAttribute("keyword", keyword_);
         //log.info(service.getAll());
     }
 

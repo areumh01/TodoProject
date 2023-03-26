@@ -9,7 +9,7 @@ import java.util.List;
 public interface TodoService {
     void register(TodoDTO todoDTO);
     List<TodoDTO> getAll();
-    List<TodoDTO> getList(int page);
+    List<TodoDTO> getList(int page, String field, String keyword);
     TodoDTO getOne(Long tno);
     void remove(Long tno);
     void modify(TodoDTO todoDTO);
