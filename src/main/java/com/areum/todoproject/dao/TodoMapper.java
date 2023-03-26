@@ -8,7 +8,7 @@ import java.util.List;
 
 @Mapper
 public interface TodoMapper {
-    void insert(String title, java.sql.Date dueDate, String writer);
+    void insert(String title, java.sql.Date duedate, String writer);
     List<TodoVO> selectAll();
     List<TodoVO> selectList(int start, int end, String field, String keyword);
     TodoVO selectOne(Long tno);
