@@ -7,6 +7,9 @@
     <select id="selectAll" resultType="com.areum.todoproject.entity.TodoVO" >
         SELECT * FROM TBL_TODO ORDER BY TNO
     </select>
+    <select id="selectList" resultType="com.areum.todoproject.entity.TodoVO" >
+        SELECT * FROM (SELECT ROWNUM N, TNO, DUEDATE, WRITER, TITLE, FINISHED FROM TBL_TODO ORDER BY TNO)T WHERE N BETWEEN #{start} AND #{end}
+    </select>
     <select id="selectOne" resultType="com.areum.todoproject.entity.TodoVO" parameterType="long">
         SELECT * FROM TBL_TODO WHERE TNO=#{tno}
     </select>

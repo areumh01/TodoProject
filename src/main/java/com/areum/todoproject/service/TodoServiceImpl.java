@@ -39,6 +39,17 @@ public class TodoServiceImpl implements TodoService{
     }
 
     @Override
+    public List<TodoDTO> getList(int page) {
+        int start = (page-1)*10+1;
+        int end = page*10;
+        List<TodoVO> voList = dao.selectList(start,end);
+        List<TodoDTO> dtoList = voList.stream()
+                .map(vo -> modelMapper.map(vo,TodoDTO.class))
+                .collect(Collectors.toList());
+        return dtoList;
+    }
+
+    @Override
     public TodoDTO getOne(Long tno) {
         TodoVO vo = dao.selectOne(tno);
         TodoDTO dto = modelMapper.map(vo, TodoDTO.class);

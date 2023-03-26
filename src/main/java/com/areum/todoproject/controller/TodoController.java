@@ -24,9 +24,9 @@ public class TodoController {
 
 
     @GetMapping("/list")
-    public void list(Model model){
-        model.addAttribute("msg", "Hello");
-        model.addAttribute("lists", service.getAll());
+    public void list(@RequestParam(value = "page", defaultValue = "1") int page,Model model){
+        log.info(page);
+        model.addAttribute("lists", service.getList(page));
         //log.info(service.getAll());
     }
 
