@@ -12,6 +12,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.Date;
 
 @Builder
 @Data
@@ -26,10 +27,16 @@ public class PageRequestDTO {
     @Max(value = 100)
     private int size = 10;
 
-    private String link;
-    private String[] types;
+    private String field;
     private String keyword;
-    private boolean finished;
-    private LocalDate from;
-    private LocalDate to;
+    private String finished;
+    private java.sql.Date startDate;
+    private java.sql.Date endDate;
+
+    public int getFirstTodo(){
+        return (page-1)*10+1;
+    }
+    public int getLastTodo(){
+        return getFirstTodo()+9;
+    }
 }

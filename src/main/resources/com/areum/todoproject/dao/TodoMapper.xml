@@ -7,16 +7,28 @@
     <select id="selectAll" resultType="com.areum.todoproject.entity.TodoVO" >
         SELECT * FROM TBL_TODO ORDER BY TNO
     </select>
+    <!--page, 10, field, keyword_, finished, startDate, endDate, firstTodo, lastTodo 들어옴-->
     <select id="selectList" resultType="com.areum.todoproject.entity.TodoVO" >
         SELECT * FROM (SELECT ROWNUM N, TNO, DUEDATE, WRITER, TITLE, FINISHED FROM TBL_TODO
-        WHERE
-        <if test="field == 'title'.toString()">
-            TITLE
-        </if>
-        <if test="field == 'writerId'.toString()">
-            WRITER
-        </if>
-        LIKE #{keyword} ORDER BY TNO)T WHERE N BETWEEN #{start} AND #{end}
+        <where>
+            <if test="finished == 'on'.toString()">
+                FINISHED=1
+            </if>
+            <if test="finished == 'off'.toString()">
+                FINISHED=0
+            </if>
+            <if test="finished == 'all'.toString()">
+                FINISHED IN (0,1)
+            </if>
+            <if test="field == 'title'.toString()">
+                AND TITLE LIKE #{keyword}
+            </if>
+            <if test="field == 'writerId'.toString()">
+                AND WRITER LIKE #{keyword}
+            </if>
+        AND DUEDATE BETWEEN #{startDate} AND #{endDate}
+        </where>
+        ORDER BY TNO)T WHERE N BETWEEN #{firstTodo} AND #{lastTodo}
     </select>
     <select id="selectOne" resultType="com.areum.todoproject.entity.TodoVO" parameterType="long">
         SELECT * FROM TBL_TODO WHERE TNO=#{tno}
@@ -32,4 +44,8 @@
     <delete id="delete" parameterType="long">
         DELETE FROM TBL_TODO WHERE TNO=#{tno}
     </delete>
+
+    <select id="getCount" resultType="int">
+        SELECT COUNT(*) FROM TBL_TODO
+    </select>
 </mapper>

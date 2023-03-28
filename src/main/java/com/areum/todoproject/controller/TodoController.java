@@ -1,5 +1,6 @@
 package com.areum.todoproject.controller;
 
+import com.areum.todoproject.dto.PageRequestDTO;
 import com.areum.todoproject.dto.TodoDTO;
 import com.areum.todoproject.service.TodoService;
 import lombok.extern.java.Log;
@@ -10,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -26,14 +28,26 @@ public class TodoController {
     @GetMapping("/list")
     public void list(@RequestParam(value = "page", defaultValue = "1") int page,
                      @RequestParam(value= "field", defaultValue = "title") String field,
-                     @RequestParam(value= "keyword", defaultValue = "") String keyword_, Model model){
-        log.info(page);
+                     @RequestParam(value= "keyword", defaultValue = "") String keyword_,
+                     @RequestParam(value= "finished", defaultValue = "all") String finished,
+                     @RequestParam(value= "startDate", defaultValue = "1111-01-01") String startDate_,
+                     @RequestParam(value= "endDate", defaultValue = "9999-12-31") String endDate_,
+                     Model model){
         String keyword = "%"+keyword_+"%";
-        log.info(keyword);
-        model.addAttribute("lists", service.getList(page,field,keyword));
+        //java.time.LocalDate startDate = LocalDate.parse(startDate_);
+        java.sql.Date startDate = Date.valueOf(startDate_);
+        //java.time.LocalDate endDate = LocalDate.parse(endDate_);
+        java.sql.Date endDate = Date.valueOf(endDate_);
+        log.info(finished);
+        PageRequestDTO requestDTO = new PageRequestDTO(page, 10, field, keyword, finished, startDate, endDate);
+        log.info(service.getList(requestDTO));
+        model.addAttribute("lists", service.getList(requestDTO));
         model.addAttribute("page", page);
         model.addAttribute("field", field);
         model.addAttribute("keyword", keyword_);
+        model.addAttribute("finished", finished);
+        model.addAttribute("startDate", startDate_);
+        model.addAttribute("endDate", endDate_);
         //log.info(service.getAll());
     }
 

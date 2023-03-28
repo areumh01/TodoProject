@@ -10,7 +10,7 @@ import java.util.List;
 public interface TodoMapper {
     void insert(String title, java.sql.Date duedate, String writer);
     List<TodoVO> selectAll();
-    List<TodoVO> selectList(int start, int end, String field, String keyword);
+    List<TodoVO> selectList(PageRequestDTO requestDTO);
     TodoVO selectOne(Long tno);
     void delete(Long tno);
     void update(String title, java.sql.Date duedate, String writer, int finished, Long tno);

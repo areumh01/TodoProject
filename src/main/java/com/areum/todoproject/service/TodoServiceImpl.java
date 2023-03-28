@@ -1,6 +1,8 @@
 package com.areum.todoproject.service;
 
 import com.areum.todoproject.dao.TodoMapper;
+import com.areum.todoproject.dto.PageRequestDTO;
+import com.areum.todoproject.dto.PageResponseDTO;
 import com.areum.todoproject.dto.TodoDTO;
 import com.areum.todoproject.entity.TodoVO;
 import lombok.extern.log4j.Log4j2;
@@ -39,14 +41,16 @@ public class TodoServiceImpl implements TodoService{
     }
 
     @Override
-    public List<TodoDTO> getList(int page, String field, String keyword) {
-        int start = (page-1)*10+1;
-        int end = page*10;
-        List<TodoVO> voList = mapper.selectList(start,end, field, keyword);
+    public PageResponseDTO<TodoDTO> getList(PageRequestDTO requestDTO) {
+        //int start = (requestDTO.getPage()-1)*10+1;
+        //int end = page*10;
+        List<TodoVO> voList = mapper.selectList(requestDTO);
         List<TodoDTO> dtoList = voList.stream()
                 .map(vo -> modelMapper.map(vo,TodoDTO.class))
                 .collect(Collectors.toList());
-        return dtoList;
+
+        PageResponseDTO<TodoDTO> responseDTO = new PageResponseDTO<>(requestDTO, dtoList, mapper.getCount());
+        return responseDTO;
     }
 
     @Override
